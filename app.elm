@@ -7,7 +7,7 @@ import Html.Attributes exposing (style, src)
 main : Html.Html msg
 main =
     div [ boxStyle, mainStyle, largeText ]
-        [ inlineDiv [ text "Everyting that matters" ]
+        [ inlineDiv [ text "Everything that matters" ]
         , arrow
         , inlineDiv [ img [ src "elm-logo.png" ] [] ]
         , arrow
