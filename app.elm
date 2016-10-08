@@ -1,18 +1,58 @@
-module Main exposing (..)
+module Main exposing (main)
 
-import Html exposing (div, img, text)
+import Html exposing (button, div, img, text)
+import Html.App exposing (beginnerProgram)
 import Html.Attributes exposing (style, src)
+import Html.Events exposing (onClick)
 
 
-main : Html.Html msg
 main =
+    beginnerProgram { model = 0, view = view, update = update }
+
+
+
+-- MODEL
+-- UPDATE
+
+
+type Msg
+    = Increment
+    | Decrement
+
+
+update msg model =
+    case msg of
+        Increment ->
+            model + 1
+
+        Decrement ->
+            model - 1
+
+
+
+-- VIEW
+
+
+view model =
     div [ boxStyle, mainStyle, largeText ]
-        [ inlineDiv [ text "Everything that matters" ]
+        [ everyThingThatMatters
         , arrow
         , inlineDiv [ img [ src "elm-logo.png" ] [] ]
         , arrow
-        , inlineDiv [ text "Your dream appearance." ]
+        , yourDreamAppearance model
         ]
+
+
+everyThingThatMatters =
+    inlineDiv
+        [ button [ buttonStyle, onClick Decrement ] [ text "-" ]
+        , button [ buttonStyle, onClick Increment ] [ text "+" ]
+        ]
+
+
+yourDreamAppearance model =
+    div (appearanceStyle :: [ inline ])
+        [ div [ appearanceTextStyle ] [ text <| toString model ] ]
 
 
 arrow =
@@ -24,21 +64,52 @@ inlineDiv elements =
 
 
 
------ STYLING -------
+----- STYLING
 
 
 mainStyle =
-    style [ ( "font-family", "Helvetica" ) ]
+    style
+        [ ( "font-family", "Helvetica" )
+        , ( "color", elmDarkblue )
+        ]
 
 
 boxStyle =
     style [ ( "padding", "30px" ) ]
 
 
+buttonStyle =
+    style
+        [ ( "font-size", "24px" )
+        , ( "background-color", "#7CD12A" )
+        , ( "border", "none" )
+        , ( "border-radius", "4px" )
+        , ( "min-height", "45px" )
+        , ( "min-width", "45px" )
+        , ( "margin", "5px" )
+        ]
+
+
 arrowStyle =
     style
-        [ ( "font-size", "64px" )
-        , ( "color", "#474E63" )
+        [ ( "font-size", "64px" ) ]
+
+
+appearanceStyle =
+    style
+        [ ( "height", "200px" )
+        , ( "width", "200px" )
+        , ( "border", "4px solid " ++ elmLightblue )
+          --  , ( "background-color", elmOrange )
+        , ( "border-radius", "4px" )
+        ]
+
+
+appearanceTextStyle =
+    style
+        [ ( "font-size", "128px" )
+        , ( "padding", "30px" )
+        , ( "padding-left", "60px" )
         ]
 
 
@@ -55,3 +126,19 @@ inline =
 
 inlineDivStyles =
     [ boxStyle, inline ]
+
+
+elmDarkblue =
+    "#474E63"
+
+
+elmGreen =
+    "#7CD12A"
+
+
+elmLightblue =
+    "#50A5C0"
+
+
+elmOrange =
+    "#E89409"
