@@ -1,17 +1,25 @@
 module Main exposing (main)
 
 import Html exposing (button, div, img, text)
-import Html.App exposing (beginnerProgram)
+import Html.App exposing (program)
 import Html.Attributes exposing (style, src)
 import Html.Events exposing (onClick)
+import Time exposing (every, second)
 
 
 main =
-    beginnerProgram { model = 0, view = view, update = update }
+    program { init = init, update = update, subscriptions = subscriptions, view = view }
 
 
 
 -- MODEL
+
+
+init =
+    ( 0, Cmd.none )
+
+
+
 -- UPDATE
 
 
@@ -23,10 +31,18 @@ type Msg
 update msg model =
     case msg of
         Increment ->
-            model + 1
+            ( model + 1, Cmd.none )
 
         Decrement ->
-            model - 1
+            ( model - 1, Cmd.none )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions model =
+    every second (always Increment)
 
 
 
