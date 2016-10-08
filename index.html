@@ -1,13 +1,19 @@
-<!DOCTYPE Html>
+<!DOCTYPE html>
 
 <html>
 <head>
   <title>Your dream appearance</title>
   <link type="text/css" rel="stylesheet" href="app.css" />
+  <script type="application/javascript" src="app.js"></script>
 </head>
 
 <body>
-  <h1>Elm Demo</h1>    
-    <div id="elm">Placeholder</div>
+  <h1>Elm Demo</h1>
+    <div id="elm"></div>
   </body>
+
+  <script type="application/javascript">
+    var node = document.getElementById('elm');
+    var app = Elm.Main.embed(node);
+  </script>
 </html>
