@@ -98,9 +98,7 @@ arrowStyle =
 appearanceStyle =
     style
         [ ( "height", "200px" )
-        , ( "width", "200px" )
         , ( "border", "4px solid " ++ elmLightblue )
-          --  , ( "background-color", elmOrange )
         , ( "border-radius", "4px" )
         ]
 
@@ -108,8 +106,7 @@ appearanceStyle =
 appearanceTextStyle =
     style
         [ ( "font-size", "128px" )
-        , ( "padding", "30px" )
-        , ( "padding-left", "60px" )
+        , ( "padding", "30px 60px 30px 60px" )
         ]
 
 
