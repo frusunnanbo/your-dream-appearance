@@ -4,6 +4,8 @@ import Html exposing (button, div, img, text)
 import Html.App exposing (program)
 import Html.Attributes exposing (style, src)
 import Html.Events exposing (onClick)
+import Svg exposing (svg, circle, text')
+import Svg.Attributes exposing (width, height, cy, cx, r, fill, fontSize, x, y, textAnchor, alignmentBaseline)
 import Time exposing (every, second)
 
 
@@ -68,7 +70,15 @@ everyThingThatMatters =
 
 yourDreamAppearance model =
     div (appearanceStyle :: [ inline ])
-        [ div [ appearanceTextStyle ] [ text <| toString model ] ]
+        [ yourSvgDream model
+        ]
+
+
+yourSvgDream model =
+    svg [ width "200", height "200" ]
+        [ circle [ cx "100", cy "100", r (toString (model * 2)), fill elmOrange ] []
+        , text' [ x "100", y "100", fontSize <| (toString (model * 2)) ++ "px", fill elmDarkblue, textAnchor "middle", alignmentBaseline "middle" ] [ text <| toString model ]
+        ]
 
 
 arrow =
