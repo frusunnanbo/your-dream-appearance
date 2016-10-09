@@ -70,7 +70,10 @@ everyThingThatMatters =
 
 yourDreamAppearance model =
     div (appearanceStyle :: [ inline ])
-        [ yourSvgDream model
+        [ if model < 50 then
+            yourSvgDream model
+          else
+            img [ src "pia.jpg", Html.Attributes.width 200 ] []
         ]
 
 
