@@ -6,7 +6,7 @@ import Html.Attributes exposing (style, src)
 import Html.Events exposing (onClick)
 import Svg exposing (svg, circle, text')
 import Svg.Attributes exposing (width, height, cy, cx, r, fill, fontSize, x, y, textAnchor, alignmentBaseline)
-import Time exposing (every, second)
+import Time exposing (every, millisecond)
 
 
 main =
@@ -44,7 +44,7 @@ update msg model =
 
 
 subscriptions model =
-    every second (always Increment)
+    every (millisecond * 200) (always Increment)
 
 
 
@@ -72,7 +72,7 @@ yourDreamAppearance model =
     div (appearanceStyle :: [ inline ])
         [ if model < 0 then
             img [ src "alf.jpg", Html.Attributes.width 200 ] []
-          else if model > 50 then
+          else if model > 100 then
             img [ src "pia.jpg", Html.Attributes.width 200 ] []
           else
             yourSvgDream model
@@ -81,8 +81,8 @@ yourDreamAppearance model =
 
 yourSvgDream model =
     svg [ width "200", height "200" ]
-        [ circle [ cx "100", cy "100", r (toString (model * 2)), fill elmOrange ] []
-        , text' [ x "100", y "100", fontSize <| (toString (model * 2)) ++ "px", fill elmDarkblue, textAnchor "middle", alignmentBaseline "middle" ] [ text <| toString model ]
+        [ circle [ cx "100", cy "100", r (toString model), fill elmOrange ] []
+        , text' [ x "100", y "100", fontSize <| (toString model) ++ "px", fill elmDarkblue, textAnchor "middle", alignmentBaseline "middle" ] [ text <| toString model ]
         ]
 
 
