@@ -2,15 +2,20 @@ module Main exposing (main)
 
 import Html exposing (button, div, img, text)
 import Html.App exposing (program)
-import Html.Attributes exposing (style, src)
+import Html.Attributes exposing (src)
 import Html.Events exposing (onClick)
 import Svg exposing (svg, circle, text')
-import Svg.Attributes exposing (width, height, cy, cx, r, fill, fontSize, x, y, textAnchor, alignmentBaseline)
+import Svg.Attributes exposing (..)
 import Time exposing (every, millisecond)
 
 
 main =
-    program { init = init, update = update, subscriptions = subscriptions, view = view }
+    program
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
 
 
 
@@ -69,20 +74,28 @@ everyThingThatMatters =
 
 
 yourDreamAppearance model =
-    div (appearanceStyle :: [ inline ])
+    div (boundedBox :: [ inline ])
         [ if model < 0 then
             img [ src "alf.jpg", Html.Attributes.width 200 ] []
           else if model > 100 then
             img [ src "pia.jpg", Html.Attributes.width 200 ] []
           else
-            yourSvgDream model
+            theAnimation model
         ]
 
 
-yourSvgDream model =
+theAnimation model =
     svg [ width "200", height "200" ]
         [ circle [ cx "100", cy "100", r (toString model), fill elmOrange ] []
-        , text' [ x "100", y "100", fontSize <| (toString model) ++ "px", fill elmDarkblue, textAnchor "middle", alignmentBaseline "middle" ] [ text <| toString model ]
+        , text'
+            [ x "100"
+            , y "100"
+            , fontSize <| (toString model) ++ "px"
+            , fill elmDarkblue
+            , textAnchor "middle"
+            , alignmentBaseline "middle"
+            ]
+            [ text <| toString model ]
         ]
 
 
@@ -99,18 +112,18 @@ inlineDiv elements =
 
 
 mainStyle =
-    style
+    Html.Attributes.style
         [ ( "font-family", "Helvetica" )
         , ( "color", elmDarkblue )
         ]
 
 
 boxStyle =
-    style [ ( "padding", "30px" ) ]
+    Html.Attributes.style [ ( "padding", "30px" ) ]
 
 
 buttonStyle =
-    style
+    Html.Attributes.style
         [ ( "font-size", "24px" )
         , ( "background-color", "#7CD12A" )
         , ( "border", "none" )
@@ -122,12 +135,12 @@ buttonStyle =
 
 
 arrowStyle =
-    style
+    Html.Attributes.style
         [ ( "font-size", "64px" ) ]
 
 
-appearanceStyle =
-    style
+boundedBox =
+    Html.Attributes.style
         [ ( "height", "200px" )
         , ( "border", "4px solid " ++ elmLightblue )
         , ( "border-radius", "4px" )
@@ -135,18 +148,18 @@ appearanceStyle =
 
 
 appearanceTextStyle =
-    style
+    Html.Attributes.style
         [ ( "font-size", "128px" )
         , ( "padding", "30px 60px 30px 60px" )
         ]
 
 
 largeText =
-    style [ ( "font-size", "24px" ) ]
+    Html.Attributes.style [ ( "font-size", "24px" ) ]
 
 
 inline =
-    style
+    Html.Attributes.style
         [ ( "display", "inline-block" )
         , ( "vertical-align", "middle" )
         ]
