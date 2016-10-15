@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import Html exposing (button, div, img, text)
+import Html exposing (Html, button, div, img, text)
 import Html.App exposing (program)
 import Html.Attributes exposing (src)
 import Html.Events exposing (onClick)
@@ -9,6 +9,7 @@ import Svg.Attributes exposing (..)
 import Time exposing (every, millisecond)
 
 
+main : Program Never
 main =
     program
         { init = init
@@ -22,6 +23,11 @@ main =
 -- MODEL
 
 
+type alias Model =
+    Int
+
+
+init : ( Model, Cmd Msg )
 init =
     ( 0, Cmd.none )
 
@@ -35,6 +41,7 @@ type Msg
     | Decrement
 
 
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Increment ->
@@ -48,6 +55,7 @@ update msg model =
 -- SUBSCRIPTIONS
 
 
+subscriptions : Model -> Sub Msg
 subscriptions model =
     every (millisecond * 200) (always Increment)
 
@@ -56,6 +64,7 @@ subscriptions model =
 -- VIEW
 
 
+view : Model -> Html Msg
 view model =
     div [ boxStyle, mainStyle, largeText ]
         [ everyThingThatMatters
@@ -66,6 +75,7 @@ view model =
         ]
 
 
+everyThingThatMatters : Html Msg
 everyThingThatMatters =
     inlineDiv
         [ button [ buttonStyle, onClick Decrement ] [ text "-" ]
@@ -73,6 +83,7 @@ everyThingThatMatters =
         ]
 
 
+yourDreamAppearance : Model -> Html Msg
 yourDreamAppearance model =
     div (boundedBox :: [ inline ])
         [ if model < 0 then
@@ -84,6 +95,7 @@ yourDreamAppearance model =
         ]
 
 
+theAnimation : Model -> Html Msg
 theAnimation model =
     svg [ width "200", height "200" ]
         [ circle [ cx "100", cy "100", r (toString model), fill elmOrange ] []
@@ -99,10 +111,12 @@ theAnimation model =
         ]
 
 
+arrow : Html Msg
 arrow =
     div (arrowStyle :: inlineDivStyles) [ text "=>" ]
 
 
+inlineDiv : List (Html Msg) -> Html Msg
 inlineDiv elements =
     div inlineDivStyles elements
 
