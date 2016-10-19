@@ -69,10 +69,14 @@ view model =
     div [ id "main" ]
         [ everyThingThatMatters
         , arrow
-        , div [] [ img [ src "elm-logo.png" ] [] ]
+        , elm
         , arrow
         , yourDreamAppearance model
         ]
+
+
+elm =
+    div [] [ img [ src "elm-logo.png" ] [] ]
 
 
 everyThingThatMatters : Html Msg
